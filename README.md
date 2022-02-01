@@ -53,7 +53,7 @@ final if-block like this (replace `104325692` with your chat id):
 if [[ -f /data/valetudo ]]; then
         VALETUDO_CONFIG_PATH=/data/valetudo_config.json /data/valetudo > /dev/null 2>&1 &
         sleep 30
-        PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" CHAT_IDS='[104325692]' ./valetudo valegram-bot.js > /tmp/valegram-log.log 2>&1 &
+        PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" CHAT_IDS='[104325692]' /data/valetudo /data/valegram-bot.js > /tmp/valegram-log.log 2>&1 &
 fi
 ```
 
