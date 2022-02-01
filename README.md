@@ -32,7 +32,7 @@ release.
 
 ```shell
 cd /data
-wget -O valegram-bot.js https://github.com/ccoors/valegram/releases/download/v0.1.0/valegram-bot.js
+wget -O valegram-bot.js https://github.com/ccoors/valegram-bot/releases/download/v0.1.0/valegram-bot.js
 ```
 
 ### Setup valegram-bot
