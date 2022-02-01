@@ -1,0 +1,30 @@
+name: Publish Release
+on:
+  release:
+    types:
+      - "published"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Install ncc
+        run: npm i -g @vercel/ncc
+      - name: Install dependencies
+        run: npm install
+      - name: Build distribution
+        run: npm run build
+      - name: Rename dist
+        run: mv dist/index.js dist/valegram-bot.js
+      - name: Upload release binaries
+        uses: alexellis/upload-assets@0.3.0
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          asset_paths: '["./dist/valegram-bot.js"]'

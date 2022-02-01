@@ -1,0 +1,27 @@
+name: CI
+
+on: [push]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Install ncc
+        run: npm i -g @vercel/ncc
+      - name: Install dependencies
+        run: npm install
+      - name: Build distribution
+        run: npm run build
+      - name: Rename dist
+        run: mv dist/index.js dist/valegram-bot.js
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: valegram-bot
+          path: dist/valegram-bot.js

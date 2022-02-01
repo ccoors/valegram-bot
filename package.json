@@ -1,0 +1,20 @@
+{
+  "name": "valegram-bot",
+  "version": "0.1.0",
+  "description": "A Valetudo Telegram Bot",
+  "main": "index.js",
+  "author": "ccoors",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "build": "ncc build index.js -m -o dist",
+    "start": "node index.js",
+    "format": "eslint index.js src --fix"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "node-telegram-bot-api": "^0.56.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.8.0"
+  }
+}
