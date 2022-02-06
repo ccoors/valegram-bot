@@ -1,7 +1,7 @@
 const {CommandGroup} = require("./command_group");
 const {filter} = require("../chat_ids");
 
-class PresetSelectionGroup extends CommandGroup {
+class PresetSelectionCommandGroup extends CommandGroup {
     constructor(props) {
         super(props);
         this.selectPreset = this.selectPreset.bind(this);
@@ -152,4 +152,4 @@ class PresetSelectionGroup extends CommandGroup {
     }
 }
 
-module.exports = {PresetSelectionGroup};
+module.exports = {PresetSelectionCommandGroup};

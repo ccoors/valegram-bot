@@ -1,6 +1,6 @@
 const {StatusCommandGroup} = require("./status");
 const {MapCommandGroup} = require("./map");
-const {PresetSelectionGroup} = require("./presets");
+const {PresetSelectionCommandGroup} = require("./presets");
 const {BasicCommandGroup} = require("./basic_commands");
 const {LocateCommandGroup} = require("./locate");
 const {AutoEmptyTriggerCommandGroup} = require("./auto_empty");
@@ -15,7 +15,7 @@ function registerCommandGroups(robot, bot) {
     COMMAND_GROUPS.push(new SegmentationCommandGroup({robot, bot}));
     COMMAND_GROUPS.push(new LocateCommandGroup({robot, bot}));
     COMMAND_GROUPS.push(new MapCommandGroup({robot, bot}));
-    COMMAND_GROUPS.push(new PresetSelectionGroup({robot, bot}));
+    COMMAND_GROUPS.push(new PresetSelectionCommandGroup({robot, bot}));
     COMMAND_GROUPS.push(new AutoEmptyTriggerCommandGroup({robot, bot}));
 
     COMMAND_GROUPS.forEach((g) => {
