@@ -29,7 +29,7 @@ class SegmentationCommandGroup extends CommandGroup {
             this.robot
                 .request("robot/capabilities/MapSegmentationCapability/properties")
                 .then((res) => {
-                    this.properties = res.data;
+                    this.properties = res?.data || null;
                 });
         }
     }
@@ -64,7 +64,8 @@ class SegmentationCommandGroup extends CommandGroup {
             .request("robot/capabilities/MapSegmentationCapability", msg.chat.id)
             .then((res) => {
                 const available_segments = new Map();
-                res.data.forEach((segment) => {
+                const segments = res?.data || [];
+                segments.forEach((segment) => {
                     available_segments.set(segment.id, segment.name);
                 });
 
@@ -105,7 +106,7 @@ class SegmentationCommandGroup extends CommandGroup {
 
     make_iterations_keyboard() {
         const ret = [[]];
-        for (let i = this.properties.iterationCount.min; i <= Math.min(this.properties.iterationCount.max, 4); i++) {
+        for (let i = this.properties?.iterationCount?.min || 0; i <= Math.min(this.properties?.iterationCount?.max || 0, 4); i++) {
             ret[0].push(`${i}`);
         }
         ret[0].push("Cancel");

@@ -42,7 +42,7 @@ class StatusCommandGroup extends CommandGroup {
 
     sendCurrentStatus(msg) {
         this.robot.request("robot/state/attributes", msg.chat.id).then((res) => {
-            const attributes = res.data;
+            const attributes = res?.data || [];
 
             let response = `Bot status:
 ${this.robot.manufacturer} ${this.robot.modelName} (${this.robot.implementation})\n`;

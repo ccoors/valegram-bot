@@ -68,7 +68,7 @@ class PresetSelectionCommandGroup extends CommandGroup {
         this.robot
             .request(`robot/capabilities/${capability}/presets`, msg.chat.id)
             .then((res) => {
-                const presets = res.data;
+                const presets = res?.data || [];
                 this.bot.sendMessage(
                     msg.chat.id,
                     `Please select the preset to change the ${name} to`,

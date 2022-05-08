@@ -54,13 +54,13 @@ class Robot {
 
     fillRobotInfo() {
         this.request("robot").then((res) => {
-            this.manufacturer = res.data.manufacturer;
-            this.modelName = res.data.modelName;
-            this.implementation = res.data.implementation;
+            this.manufacturer = res?.data?.manufacturer || "?";
+            this.modelName = res?.data?.modelName || "?";
+            this.implementation = res?.data?.implementation || "?";
         });
 
         this.request("robot/capabilities").then((res) => {
-            this.capabilities = res.data;
+            this.capabilities = res?.data || [];
         });
 
         // This could be done using SSE
@@ -70,7 +70,7 @@ class Robot {
 
     fetchAttributes() {
         this.request("robot/state/attributes").then((res) => {
-            this.attributes = res.data;
+            this.attributes = res?.data || [];
             const newStatusState = this.attributes.filter(a => a?.__class === "StatusStateAttribute").at(0).value;
             if (this.lastStatusState && newStatusState !== this.lastStatusState) {
                 this.attributesEmitter.emit("status_state", newStatusState);
