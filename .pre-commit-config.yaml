@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.2.0
     hooks:
       - id: check-yaml
       - id: check-json
@@ -14,11 +14,11 @@ repos:
       - id: forbid-new-submodules
       - id: mixed-line-ending
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: "v8.8.0"
+    rev: "v8.15.0"
     hooks:
       - id: eslint
   - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: "v2.5.1"
+    rev: "v2.6.2"
     hooks:
       - id: prettier
         exclude: index.js|src

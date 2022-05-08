@@ -11,10 +11,10 @@
     "format": "eslint index.js src --fix"
   },
   "dependencies": {
-    "axios": "^0.24.0",
-    "node-telegram-bot-api": "^0.56.0"
+    "axios": "^0.27.2",
+    "node-telegram-bot-api": "^0.57.0"
   },
   "devDependencies": {
-    "eslint": "^8.8.0"
+    "eslint": "^8.15.0"
   }
 }
