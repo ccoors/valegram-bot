@@ -27,12 +27,12 @@ by adding it to your contacts and clicking the "Start" button.
 
 ### Download valegram-bot
 
-Download the latest valegram-bot release to your robot. On Dreame, run this command, adjusting `v0.1.1` to the latest
+Download the latest valegram-bot release to your robot. On Dreame, run this command, adjusting `v0.1.2` to the latest
 release.
 
 ```shell
 cd /data
-wget -O valegram-bot.js https://github.com/ccoors/valegram-bot/releases/download/v0.1.1/valegram-bot.js
+wget -O valegram-bot.js https://github.com/ccoors/valegram-bot/releases/download/v0.1.2/valegram-bot.js
 ```
 
 ### Setup valegram-bot
