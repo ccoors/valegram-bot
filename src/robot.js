@@ -71,8 +71,8 @@ class Robot {
     fetchAttributes() {
         this.request("robot/state/attributes").then((res) => {
             this.attributes = res?.data || [];
-            const newStatusState = this.attributes.filter(a => a?.__class === "StatusStateAttribute").at(0).value;
-            if (this.lastStatusState && newStatusState !== this.lastStatusState) {
+            const newStatusState = this.attributes.filter(a => a?.__class === "StatusStateAttribute").at(0)?.value;
+            if (this.lastStatusState && newStatusState && newStatusState !== this.lastStatusState) {
                 this.attributesEmitter.emit("status_state", newStatusState);
             }
             this.lastStatusState = newStatusState;
