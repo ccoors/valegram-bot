@@ -103,10 +103,8 @@ export VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$"
 export CHAT_IDS='[$$$CHAT_ID$$$]'
 
 load() {
-    echo "waiting 30 seconds for valetudo startup ..."
-    sleep 30
-    echo "starting valegram"
-    start-stop-daemon -S -b -q -m -p /var/run/valegram.pid -x /usr/local/bin/valetudo /mnt/data/valegram/valegram-bot.js
+    echo "starting valegram, process will be ready in about 35 seconds."
+    start-stop-daemon -S -b -q -m -p /var/run/valegram.pid -x bash -- -c 'sleep 30; /usr/local/bin/valetudo /mnt/data/valegram/valegram-bot.js'
 }
 
 unload() {
@@ -131,7 +129,7 @@ case "$1" in
 esac
 ```
 
-You can try starting the valegram service:
+You can try starting the valegram service (startup is delayed by 30 seconds):
 ```
 /etc/init/S999valegram start
 ```
