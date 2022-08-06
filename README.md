@@ -43,7 +43,7 @@ cd /mnt/data/valegram
 wget -O valegram-bot.js https://github.com/ccoors/valegram-bot/releases/download/v0.1.2/valegram-bot.js
 ```
 
-### Step3: Setup valegram-bot
+### Step 3: Setup valegram-bot
 
 Start the bot directly from the shell. Replace `$$$BOT_TOKEN$$$` with the token obtained from BotFather earlier.
 
@@ -143,7 +143,6 @@ If everything works, valegram should start on startup of your robot.
 
 Run the `/help` command in Telegram. Remove the `/` from each line, use `/setcommands` in BotFather and set the command block.
 
-### Roborock Robot
 
 ## Configuration
 
