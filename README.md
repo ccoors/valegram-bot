@@ -141,7 +141,6 @@ If everything works, valegram should start on startup of your robot.
 
 Run the `/help` command in Telegram. Remove the `/` from each line, use `/setcommands` in BotFather and set the command block.
 
-
 ## Configuration
 
 valegram-bot is configured through environment variables.
