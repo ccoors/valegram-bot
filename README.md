@@ -20,48 +20,130 @@ This bot uses the Valetudo HTTP-API v2. Support for MQTT is not (yet?) implement
 
 Installation is a bit complicated, due to how Telegram Bots work.
 
-### Create Telegram Bot
+### Step 1: Create Telegram Bot
 
 Create a Telegram Bot using [Botfather](https://core.telegram.org/bots#6-botfather). Remember the `token`. Start the bot
 by adding it to your contacts and clicking the "Start" button.
 
-### Download valegram-bot
+### Step 2: Download valegram-bot
 
-Download the latest valegram-bot release to your robot. On Dreame, run this command, adjusting `v0.1.2` to the latest
+Download the latest valegram-bot release to your robot. Run this command, adjusting `v0.1.2` to the latest
 release.
 
+#### Dreame
 ```shell
 cd /data
 wget -O valegram-bot.js https://github.com/ccoors/valegram-bot/releases/download/v0.1.2/valegram-bot.js
 ```
 
-### Setup valegram-bot
+#### Roborock
+```shell
+mkdir /mnt/data/valegram
+cd /mnt/data/valegram
+wget -O valegram-bot.js https://github.com/ccoors/valegram-bot/releases/download/v0.1.2/valegram-bot.js
+```
+
+### Step3: Setup valegram-bot
 
 Start the bot directly from the shell. Replace `$$$BOT_TOKEN$$$` with the token obtained from BotFather earlier.
 
+#### Dreame
 ```shell
 PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" ./valetudo valegram-bot.js
+```
+
+#### Roborock
+```shell
+PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" /usr/local/bin/valetudo /mnt/data/valegram/valegram-bot.js
 ```
 
 The bot needs to know which chats to respond to - otherwise everybody could control your robot. You can use
 the `/chat_id` command in Telegram to get your chat id (eg. `104325692`).
 
+Try it out!
+#### Dreame
+```shell
+PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" CHAT_IDS='[$$$CHAT_ID$$$]' ./valetudo valegram-bot.js
+```
+
+#### Roborock
+```shell
+PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" CHAT_IDS='[$$$CHAT_ID$$$]' /usr/local/bin/valetudo /mnt/data/valegram/valegram-bot.js
+```
+
+#### Dreame
 Stop the bot (CTRL+C) and add it to your autostart script (`/data/_root_postboot.sh` on Dreame). I suggest extending the
-final if-block like this (replace `104325692` with your chat id):
+final if-block like this (replace `$$$CHAT_ID$$$` with your chat id):
 
 ```
 if [[ -f /data/valetudo ]]; then
         VALETUDO_CONFIG_PATH=/data/valetudo_config.json /data/valetudo > /dev/null 2>&1 &
         sleep 30
-        PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" CHAT_IDS='[104325692]' /data/valetudo /data/valegram-bot.js > /tmp/valegram-log.log 2>&1 &
+        PKG_EXECPATH=PKG_INVOKE_NODEJS VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$" CHAT_IDS='[$$$CHAT_ID$$$]' /data/valetudo /data/valegram-bot.js > /tmp/valegram-log.log 2>&1 &
 fi
 ```
 
 Alternatively, create a wrapper shell-script, which may prove more to be maintainable in the future.
 
-### Add commands to BotFather (optional)
+#### Roborock
+Stop the bot (CTRL+C) and add creat an autostart script:
+
+```shell
+cd /etc/init
+touch S999valegram
+chmod +x S999valegram
+```
+
+Edit the script with nano `nano S999valegram` and add the folowing script (replace `$$$BOT_TOKEN$$$` and `$$$CHAT_ID$$$`).
+```bash
+#!/bin/sh
+
+export PKG_EXECPATH=PKG_INVOKE_NODEJS
+export VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$"
+export CHAT_IDS='[187520703]'
+
+load() {
+    echo "waiting 30 seconds for valetudo startup ..."
+    sleep 30
+    echo "starting valegram"
+    start-stop-daemon -S -b -q -m -p /var/run/valegram.pid -x /usr/local/bin/valetudo /mnt/data/valegram/valegram-bot.js
+}
+
+unload() {
+    echo "stopping valegram"
+    start-stop-daemon -K -q -p /var/run/valegram.pid
+}
+
+case "$1" in
+    start)
+        load
+        ;;
+    stop)
+        unload
+        ;;
+    restart)
+        unload
+        load
+        ;;
+    *)
+        echo "$0 <start/stop/restart>"
+        ;;
+esac
+```
+
+You can try starting the valegram service:
+```
+/etc/init/S999valegram start
+```
+
+If everything works, valegram should start on startup of your robot.
+
+
+### Step 5: Add commands to BotFather (optional)
 
 Run the `/help` command in Telegram. Remove the `/` from each line, use `/setcommands` in BotFather and set the command block.
+
+### Roborock Robot
 
 ## Configuration
 
