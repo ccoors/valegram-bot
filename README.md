@@ -86,7 +86,7 @@ fi
 Alternatively, create a wrapper shell-script, which may prove more to be maintainable in the future.
 
 #### Roborock
-Stop the bot (CTRL+C) and add creat an autostart script:
+Stop the bot (CTRL+C) and create an autostart script:
 
 ```shell
 cd /etc/init
@@ -100,7 +100,7 @@ Edit the script with nano `nano S999valegram` and add the folowing script (repla
 
 export PKG_EXECPATH=PKG_INVOKE_NODEJS
 export VALEGRAM_BOT_TOKEN="$$$BOT_TOKEN$$$"
-export CHAT_IDS='[187520703]'
+export CHAT_IDS='[$$$CHAT_ID$$$]'
 
 load() {
     echo "waiting 30 seconds for valetudo startup ..."
